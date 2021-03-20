@@ -10,4 +10,5 @@ class SPP extends Model
     use HasFactory;
 
     protected $table = 'spps';
+    protected $fillable = ['tahun','nominal'];
 }

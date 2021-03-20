@@ -18,7 +18,7 @@ class SiswaController extends Controller
         $pembayarans = Pembayaran::all();
         $kelas = Kelas::all();
         
-        return view('siswa.index',compact('siswas'));
+        return view('siswa.index',compact('siswas','kelas','spps'));
     }
 
     public function create() {
@@ -26,7 +26,7 @@ class SiswaController extends Controller
         $pembayarans = Pembayaran::all();
         $kelas = Kelas::all();
 
-        return view('siswa.create');
+        return view('siswa.create',compact('spps','kelas'));
     }
 
     public function store(Request $request) {
@@ -51,13 +51,13 @@ class SiswaController extends Controller
 
     public function edit($nisn) {
         $siswas = Siswa::where('nisn',$nisn)->first();
-        return view('siswa.show',compact('siswas'));
+        return view('siswa.edit',compact('siswas'));
     }
 
     public function update(Request $request,$nisn) {
 
         $siswas = Siswa::where('nisn',$nisn)->update([
-            'nisn' => $request ->nisn,
+            'nisn' => $request->nisn,
             'nis' => $request ->nis,
             'nama' => $request->nama,
             'id_kelas' => $request->id_kelas,
@@ -69,5 +69,10 @@ class SiswaController extends Controller
         return redirect()->route('siswa.index') ->with('success','Siswa updated successfully');
     }
 
+    public function destroy($nisn) {
+        $siswas = Siswa::where('nisn',$nisn)->get();
+        $siswas->delete();
 
+        return redirect()->route('siswa.index',compact('siswas'))->with('success','Siswa deleted successfully');
+    }
 }

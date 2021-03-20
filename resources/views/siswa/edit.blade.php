@@ -27,6 +27,6 @@
             <input type="text" name="id_spp" value="{{ $siswas->id_spp }}">
                 <br>
                 <br>
-                <button type="submit">Tambah SISWA</button>
+                <button type="submit">Update SISWA</button>
         </center>
 </form>
