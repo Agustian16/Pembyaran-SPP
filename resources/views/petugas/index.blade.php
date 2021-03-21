@@ -11,14 +11,17 @@
             <th>No.</th>
             <th>Username</th>
             <th>Password</th>
+            <th>Level</th>
+            <th>Aksi</th>
         </tr>
     </thead>
     <tbody>
-        @foreach ($petugas as $s )
         <tr>
+            @foreach ($petugas as $s )
             <td>{{ $i++ }}</td>
             <td>{{ $s->username }}</td>
             <td>{{ $s->password }}</td>
+            <td>{{ $s->level }}</td>
             <td>    
                 <form action="{{ route('petugas.destroy', $s->id) }}" method="POST">
                     <a href="{{ route('petugas.edit',$s->id) }}">Edit</a>
@@ -26,10 +29,10 @@
                     @csrf
                     @method('DELETE')
                 <button type="submit" onclick="return confirm('Anda yakin ingin menghapus data ini?..')">Hapus</button>
+                @endforeach
             </form>
             </td>
         </tr>
-        @endforeach
     </tbody>
 
 </table>

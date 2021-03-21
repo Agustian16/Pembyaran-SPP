@@ -17,9 +17,9 @@ class CreatePembayaransTable extends Migration
             $table->id();
             $table->string('id_petugas');
             $table->string('nisn');
-            $table->date('tgl_bayar');
-            $table->date('bulan_bayar');
-            $table->date('tahun_bayar');
+            $table->string('tgl_bayar');
+            $table->string('bulan_bayar');
+            $table->string('tahun_bayar');
             $table->string('id_spp');
             $table->string('jumlah_bayar');
             $table->timestamps();

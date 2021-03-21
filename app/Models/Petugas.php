@@ -13,4 +13,8 @@ class Petugas extends Model
     protected $fillable = ['username','password','level'];
 
     protected $primaryKey = 'id';
+
+    public function pembayaran() {
+        return $this->hasMany('App\Models\Pembayaran');
+    }
 }

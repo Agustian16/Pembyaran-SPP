@@ -10,6 +10,12 @@
         <label for="">password :</label>
             <input type="text" name="password" placeholder="masukan password">
                 <br>
+                <label for="">level :</label>
+                <select name="level" id="level">
+                    <option>Petugas</option>
+                    <option>Siswa</option>
+                </select>
+                <br>
                 <br>
                 <button type="submit">Tambah Petugas</button>
         </center>

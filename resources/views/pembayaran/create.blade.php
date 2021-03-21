@@ -5,10 +5,18 @@
     @csrf
     <center>
         <label for="">Petugas:</label>
-            <input type="number" name="id_petugas" placeholder="Pilih Petugas">
+        <select name="id_petugas" id="">
+            @foreach ($petugas as $p )                
+            <option value="{{ $p->username }}">{{ $p->username }}</option>
+            @endforeach
+        </select>
                 <br>
                     <label for="">NISN :</label>
-                        <input type="number" name="nisn" placeholder="masukan NISN">
+                                <select name="nisn" id="">
+                                    @foreach ($siswa as $n )                                        
+                                    <option value="{{ $n->nisn }}">{{ $n->nisn }} - {{ $n->nama }}</option>
+                                    @endforeach
+                                </select>
                             <br>
                                 <label for="">Tanggal Bayar :</label>
                                     <input type="number" name="tgl_bayar" placeholder="masukan Tanggal Bayar">
@@ -20,10 +28,16 @@
                                         <input type="number" name="tahun_bayar" placeholder="masukan Tahun Bayar">        
                                     <br>
                                 <label for="">SPP :</label>
-                            <input type="number" name="id_spp" placeholder="Pilih Tahun SPP">        
+                                    <select name="id_spp" id="">
+                                        @foreach ($spps as $s )                                            
+                                        <option value="{{ $s->tahun }}">{{ $s->tahun }}</option>
+                                        @endforeach
+                                    </select>
                         <br>
                     <label for="">Jumlah Bayar :</label>
-                <input type="number" name="jumlah_bayar" placeholder="Jumlah">        
+                    @foreach ($spps as $s )                        
+                    <input type="number" name="jumlah_bayar" placeholder="Jumlah" value="{{ $s->nominal }}" disabled>        
+                    @endforeach
             <br>
             <br>
         <button type="submit">Tambah Data</button>

@@ -12,4 +12,15 @@ class Siswa extends Model
     protected $table = 'siswas';
 
     protected $fillable = ['nisn','nis','nama','id_kelas','alamat','no_telp','id_spp'];
+
+    public function kelas() {
+        return $this->belongsTo('App\Models\Kelas');
+    }
+    public function SPP() {
+        return $this->belongsTo('App\Models\SPP');
+    }
+
+    public function pembayaran() {
+        return $this->hasMany('App\Models\Pembayaran');
+    }
 }

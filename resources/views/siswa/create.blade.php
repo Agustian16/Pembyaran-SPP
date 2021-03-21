@@ -14,13 +14,12 @@
             <input type="text" name="nama" placeholder="masukan Nama">
                 <br>
 
-                @foreach ($kelas as $k )
-                    
                 <label for="">Kelas :</label>
                 <select name="id_kelas" id="Kelas">
+                    @foreach ($kelas as $k )
                     <option value="{{ $k->nama_kelas }}">{{ $k->nama_kelas }}</option>
+                    @endforeach
                 </select>
-                @endforeach
             
                 <br>
         <label for="">Alamat :</label>
@@ -29,13 +28,13 @@
         <label for="">No.Telp :</label>
             <input type="number" name="no_telp" placeholder="masukan No.Telp">        
                 <br>
-                @foreach ($spps as $s )
-                    
+                
                 <label for="">SPP :</label>
                 <select name="id_spp" id="">
+                    @foreach ($spps as $s )
                     <option value="{{ $s->tahun }}">{{ $s->tahun }}</option>
+                    @endforeach
                 </select>
-                @endforeach
                 <br>
                 <br>
                 <button type="submit">Tambah SISWA</button>

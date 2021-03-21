@@ -21,15 +21,14 @@ class PetugasController extends Controller
     }
 
     public function store(Request $request) {
-        $request->validate([
-            'username' => 'required',
-            'password' => Hash::make($request->newPassword),
-            'level' => 'required'
+     Petugas::create([
+            'id' => $request->id,
+            'username' => $request ->username,
+            'password' => $request->password,
+            'level' => $request->level,
         ]);
-
-        Petugas::create($request->all());
         
-        return redirect('petugas')->with('success','Siswa created successfully.');
+        return redirect('petugas');
     }
 
     public function show($id) {
@@ -51,13 +50,13 @@ class PetugasController extends Controller
             'level' => $request->level,
         ]);
 
-        return redirect()->route('petugas.index') ->with('success','Siswa updated successfully');
-    }
+        return redirect()->route('petugas.index');    }
 
     public function destroy($id) {
-        $petugas = Petugas::where('id',$id)->get();
-        $petugas->delete();
+        // $petugas = Petugas::where('id',$id)->get();
+        // $petugas->delete();
+        Petugas::find($id)->delete();
 
-        return redirect()->route('petugas.index',compact('petugas'))->with('success','Siswa deleted successfully');
+        return redirect()->route('petugas.index');
     }
 }

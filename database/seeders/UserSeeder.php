@@ -20,7 +20,12 @@ class UserSeeder extends Seeder
             'username' => 'Admin',
             'password' => bcrypt('123456'),
             'level' =>'admin',
-
-        ]);
+        ],
+        [
+            'username' => 'Admin',
+            'password' => bcrypt('123456'),
+            'level' =>'admin',
+        ]
+    );
     }
 }

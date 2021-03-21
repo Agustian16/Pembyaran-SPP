@@ -16,14 +16,20 @@
         </tr>
         <tbody>
             <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                @php
+                    $i = 1;
+                @endphp
+
+                @foreach ($pembayarans as $s )
+                <td>{{ $i++ }}</td>
+                <td>{{ $s->id_petugas }}</td>
+                <td>{{ $s->nisn }}</td>
+                <td>{{ $s->tgl_bayar }}</td>
+                <td>{{ $s->bulan_bayar }}</td>
+                <td>{{ $s->tahun_bayar }}</td>
+                <td>{{ $s->id_spp }}</td>
+                <td>{{ $s->jumlah_bayar }}</td>
+                @endforeach
             </tr>
         </tbody>
 </table>

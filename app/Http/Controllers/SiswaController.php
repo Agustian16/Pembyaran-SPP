@@ -8,6 +8,7 @@ use App\Models\Siswa;
 use App\Models\SPP;
 use App\Models\Pembayaran;
 use App\Models\Kelas;
+use App\Models\User;
 
 
 class SiswaController extends Controller
@@ -17,8 +18,8 @@ class SiswaController extends Controller
         $spps = SPP::all();
         $pembayarans = Pembayaran::all();
         $kelas = Kelas::all();
-        
-        return view('siswa.index',compact('siswas','kelas','spps'));
+        $users = User::all();
+        return view('siswa.index',compact('siswas','kelas','spps','users'));
     }
 
     public function create() {
