@@ -3,28 +3,28 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Petugas;
+use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 
 class PetugasController extends Controller
 {
     public function index() {
-        $petugas = Petugas::all();
+        $users = User::all();
         
-        return view('petugas.index',compact('petugas'));
+        return view('petugas.index',compact('users'));
     }
 
     public function create() {
-        $petugas = Petugas::all();
+        $users = User::all();
         return view('petugas.create');
     }
 
     public function store(Request $request) {
-     Petugas::create([
+     User::create([
             'id' => $request->id,
             'username' => $request ->username,
-            'password' => $request->password,
+            'password' => bcrypt($request->password),
             'level' => $request->level,
         ]);
         
@@ -32,18 +32,18 @@ class PetugasController extends Controller
     }
 
     public function show($id) {
-        $petugas = Petugas::where('id',$id)->get();
-        return view('petugas.show',compact('petugas'));
+        $users = User::where('id',$id)->get();
+        return view('petugas.show',compact('users'));
     }
 
     public function edit($id) {
-        $petugas = Petugas::where('id',$id)->first();
-        return view('petugas.edit',compact('petugas'));
+        $users = User::where('id',$id)->first();
+        return view('petugas.edit',compact('users'));
     }
 
     public function update(Request $request,$nisn) {
 
-        $petugas = Petugas::where('nisn',$nisn)->update([
+        $petugas = User::where('nisn',$nisn)->update([
             'id' => $request->id,
             'username' => $request ->username,
             'password' => $request->password,
@@ -55,7 +55,7 @@ class PetugasController extends Controller
     public function destroy($id) {
         // $petugas = Petugas::where('id',$id)->get();
         // $petugas->delete();
-        Petugas::find($id)->delete();
+        User::find($id)->delete();
 
         return redirect()->route('petugas.index');
     }

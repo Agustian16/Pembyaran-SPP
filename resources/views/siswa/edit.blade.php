@@ -9,7 +9,7 @@
             <input disabled type="text" name="nisn" value="{{ $siswas->nisn }}">
                 <br>
         <label for="">NIS :</label>
-            <input type="text" name="nis" value="{{ $siswas->nis }}">
+            <input type="text" name="nis" value="{{ $siswas->nis }}" disabled>
                 <br>
         <label for="">Nama :</label>
             <input type="text" name="nama" value="{{ $siswas->nama }}">

@@ -1,5 +1,6 @@
 <?php
 
+use App\Exports\PembayaranExport;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SiswaController as SC;
 use App\Http\Controllers\KelasController as KC;
@@ -8,6 +9,7 @@ use App\Http\Controllers\PembayaranController as PC;
 use App\Http\Controllers\PetugasController as PTGC;
 use App\Http\Controllers\LoginController as LC;
 use App\Http\Middleware\CekLevel;
+use App\Models\Pembayaran;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +25,7 @@ use App\Http\Middleware\CekLevel;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
+
 
 // ! Route Login
 Route::get('/',[LC::class,'index'])->name('login.index');
@@ -88,9 +91,13 @@ Route::middleware('ceklevel:petugas,admin')->prefix('pembayaran')->group(functio
     Route::get('/{id}/edit',[PC::class,'edit'])->name('pembayaran.edit');
     Route::put('/{id}/update',[PC::class,'update'])->name('pembayaran.update');
     Route::delete('/{id}/destroy',[PC::class,'destroy'])->name('pembayaran.destroy');
+    Route::get('/export_excel',[PC::class,'export_excel']);
+});
+
+Route::middleware('ceklevel:petugas,admin')->prefix('history')->group(function(){
+    Route::get('/',[PC::class,'history'])->name('history.index');
 });
 // ! End Of Pembayaran Route
-
 // ~ Petugas Route\
 Route::middleware('ceklevel:admin')->prefix('petugas')->group(function(){
     Route::get('/',[PTGC::class,'index'])->name('petugas.index');

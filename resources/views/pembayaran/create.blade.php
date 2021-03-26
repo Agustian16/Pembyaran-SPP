@@ -1,3 +1,4 @@
+@extends('layout')
 <h1>Halaman Tambah Transaksi</h1>
 <br>
 
@@ -18,25 +19,9 @@
                                     @endforeach
                                 </select>
                             <br>
-                                <label for="">Tanggal Bayar :</label>
-                                    <input type="number" name="tgl_bayar" placeholder="masukan Tanggal Bayar">
-                                        <br>
-                                           <label for="">Bulan Bayar :</label>
-                                                 <input type="text" name="bulan_bayar" placeholder="masukan Bulan Bayar">
-                                                    <br>
-                                            <label for="">Tahun Bayar :</label>
-                                        <input type="number" name="tahun_bayar" placeholder="masukan Tahun Bayar">        
-                                    <br>
-                                <label for="">SPP :</label>
-                                    <select name="id_spp" id="">
-                                        @foreach ($spps as $s )                                            
-                                        <option value="{{ $s->tahun }}">{{ $s->tahun }}</option>
-                                        @endforeach
-                                    </select>
-                        <br>
                     <label for="">Jumlah Bayar :</label>
                     @foreach ($spps as $s )                        
-                    <input type="number" name="jumlah_bayar" placeholder="Jumlah" value="{{ $s->nominal }}" disabled>        
+                    <input type="number" name="jumlah_bayar" placeholder="Jumlah" value="{{ $s->nominal }}">        
                     @endforeach
             <br>
             <br>
