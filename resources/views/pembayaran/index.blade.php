@@ -25,7 +25,7 @@
           <li class="nav-item">
             <a class="nav-link" href="{{ route('history.index') }}">History</a>
           </li>
-          
+
         </ul>
         <a href="{{ route('logout') }}" class="btn btn-outline-warning">Keluar</a>
       </div>
@@ -38,13 +38,15 @@
             left: 500px;
         }
     </style>
+
+
 <a href="{{ route('pembayaran.create') }}" class="btn btn-success tambah mt-3">Tambah Transaksi </a>
 </center>
 <div class="container">
     <div class="card-block text-center">
       <a href="/pembayaran/export_excel" class="btn btn-success my-3" target="_blank">EXPORT EXCEL</a>
       <table class="table table-bordered  table-hover mt-3">
-        
+
         <thead>
           <tr>
             <th>No.</th>
@@ -60,12 +62,12 @@
         </thead>
         <tbody>
           @php
-                    $i = 1;
-                    @endphp
+            $i = 1;
+          @endphp
 
-@foreach ($pembayarans as $s )
-<tr>
-<td>{{ $i++ }}</td>
+    @foreach ($pembayarans as $s )
+            <tr>
+                <td>{{ $i++ }}</td>
                 <td>{{ $s->id_petugas }}</td>
                 <td>{{ $s->nisn }}</td>
                 <td>{{ $s->tgl_bayar }}</td>
@@ -80,7 +82,7 @@
                     <button type="submit" class="btn btn-danger" onclick="return confirm('Anda yakin ingin menghapus data ini?..')">Hapus</button>
                   </form>
                 </td>
-              </tr>
+            </tr>
               @endforeach
         </tbody>
 </table>

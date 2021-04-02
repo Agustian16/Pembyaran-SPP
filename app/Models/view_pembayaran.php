@@ -9,4 +9,5 @@ class view_pembayaran extends Model
 {
     use HasFactory;
     protected $table = 'view_pembayaran';
+
 }

@@ -21,7 +21,7 @@
                         <label for="">Kelas :</label>
                         <select name="id_kelas" id="Kelas">
                             @foreach ($kelas as $k )
-                            <option value="{{ $k->nama_kelas }}">{{ $k->nama_kelas }}</option>
+                            <option value="{{ $k->id_kelas }}">{{ $k->nama_kelas }}</option>
                             @endforeach
                         </select>
                     

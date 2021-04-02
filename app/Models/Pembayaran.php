@@ -17,7 +17,7 @@ class Pembayaran extends Model
     }
 
     public function petugas() {
-        return $this->belongsTo('App\Models\Petugas');
+        return $this->belongsTo('App\Models\User');
     }
 
     public function spps() {

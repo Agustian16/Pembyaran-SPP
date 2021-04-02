@@ -37,7 +37,7 @@ Route::get('/logout',[LC::class,'logout'])->name('logout');
 // ~ Siswa Route
 Route::middleware('ceklevel:admin')->prefix('siswa')->group(function(){
     Route::get('/',[SC::class,'index'])->name('siswa.index');
-    Route::Post('/store',[SC::class,'store'])->name('siswa.store'); 
+    Route::Post('/store',[SC::class,'store'])->name('siswa.store');
     Route::get('/create',[SC::class,'create'])->name('siswa.create');
     Route::get('/{nisn}/show',[SC::class,'show'])->name('siswa.show');
     Route::get('/{nisn}/edit',[SC::class,'edit'])->name('siswa.edit');
@@ -55,8 +55,8 @@ Route::middleware('ceklevel:admin')->prefix('kelas')->group(function(){
         Route::put('/{id_kelas}/update',[KC::class,'update'])->name('kelas.update');
         Route::delete('/{id_kelas}/destroy',[KC::class,'destroy'])->name('kelas.destroy');
     });
-    
-    
+
+
 // Route::group(['middleware' => ['auth', 'ceklevel:admin']], function(){
 //     // * Kelas Route
 //     Route::get('/',[KC::class,'index'])->name('kelas.index');
@@ -67,7 +67,7 @@ Route::middleware('ceklevel:admin')->prefix('kelas')->group(function(){
 //     Route::put('/{id_kelas}/update',[KC::class,'update'])->name('kelas.update');
 //     Route::delete('/{id_kelas}/destroy',[KC::class,'destroy'])->name('kelas.destroy');
 //     // * End of Kelas Route
-    
+
 // });
 
 // ^ SPP Route
@@ -86,18 +86,24 @@ Route::middleware('ceklevel:admin')->prefix('spp')->group(function(){
 Route::middleware('ceklevel:petugas,admin')->prefix('pembayaran')->group(function(){
     Route::get('/',[PC::class,'index'])->name('pembayaran.index');
     Route::get('/create',[PC::class,'create'])->name('pembayaran.create');
-    Route::Post('/store',[PC::class,'store'])->name('pembayaran.store'); 
+    Route::Post('/store',[PC::class,'store'])->name('pembayaran.store');
     Route::get('/{id}/show',[PC::class,'show'])->name('pembayaran.show');
     Route::get('/{id}/edit',[PC::class,'edit'])->name('pembayaran.edit');
     Route::put('/{id}/update',[PC::class,'update'])->name('pembayaran.update');
     Route::delete('/{id}/destroy',[PC::class,'destroy'])->name('pembayaran.destroy');
     Route::get('/export_excel',[PC::class,'export_excel']);
+
 });
 
+// ! End Of Pembayaran Route
+
+// % History Route
 Route::middleware('ceklevel:petugas,admin')->prefix('history')->group(function(){
     Route::get('/',[PC::class,'history'])->name('history.index');
+    // Route::get('/cari',[PC::class,'cari'])->name('history.index');
 });
-// ! End Of Pembayaran Route
+// % History Route
+
 // ~ Petugas Route\
 Route::middleware('ceklevel:admin')->prefix('petugas')->group(function(){
     Route::get('/',[PTGC::class,'index'])->name('petugas.index');

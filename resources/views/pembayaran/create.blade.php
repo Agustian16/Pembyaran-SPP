@@ -7,8 +7,8 @@
     <center>
         <label for="">Petugas:</label>
         <select name="id_petugas" id="">
-            @foreach ($petugas as $p )                
-            <option value="{{ $p->username }}">{{ $p->username }}</option>
+            @foreach ($users as $p )                
+            <option value="{{ $p->id }}">{{ $p->username }}</option>
             @endforeach
         </select>
                 <br>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Petugas;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
@@ -11,7 +12,7 @@ class PetugasController extends Controller
 {
     public function index() {
         $users = User::all();
-        
+
         return view('petugas.index',compact('users'));
     }
 
@@ -27,7 +28,29 @@ class PetugasController extends Controller
             'password' => bcrypt($request->password),
             'level' => $request->level,
         ]);
-        
+
+        Petugas::create([
+            'id' => $request->id,
+            'username' => $request ->username,
+            'password' => bcrypt($request->password),
+            'level' => $request->level,
+        ]);
+
+        // $data = $request->all();
+        // $users = new User;
+
+        // // $users->id = $data['id'];
+        // $users->username = $data['username'];
+        // $users->password = $data['password'];
+        // $users->level = $data['level'];
+        // $users->save();
+
+        // $petugas = new Petugas;
+        // // $petugas->id = $data['id'];
+        // $petugas->username = $data['username'];
+        // $petugas->password = $data['password'];
+        // $petugas->level = $data['level'];
+
         return redirect('petugas');
     }
 

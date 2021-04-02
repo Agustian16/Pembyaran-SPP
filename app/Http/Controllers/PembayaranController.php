@@ -8,9 +8,12 @@ use App\Models\Pembayaran;
 use App\Models\Petugas;
 use App\Models\Siswa;
 use App\Models\SPP;
+use App\Models\User;
 use App\Exports\PembayaranExport;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Controllers\Controller;
+use App\Models\view_pembayaran;
+use Illuminate\Support\Facades\DB;
 
 class PembayaranController extends Controller
 {
@@ -20,8 +23,12 @@ class PembayaranController extends Controller
     }
     public function index()
     {
-        $pembayarans = Pembayaran::all();
-        return view('pembayaran.index',compact('pembayarans'));
+        $pembayarans = view_pembayaran::all();
+        $petugas = Petugas::all();
+        $siswa = Siswa::all();
+        $spps = SPP::all();
+        $users = User::all();
+        return view('pembayaran.index',compact('pembayarans','petugas','spps'));
     }
 
     public function create()
@@ -30,7 +37,8 @@ class PembayaranController extends Controller
         $petugas = Petugas::all();
         $siswa = Siswa::all();
         $spps = SPP::all();
-        return view('pembayaran.create',compact('pembayarans','petugas','siswa','spps'));
+        $users = User::all();
+        return view('pembayaran.create',compact('pembayarans','siswa','spps','users','petugas'));
     }
 
     public function store(Request $request) {
@@ -40,10 +48,10 @@ class PembayaranController extends Controller
         // ]);
 
         $siswa = Siswa::where('nisn', '=', $request->nisn)->first();
-        
+
 
         $harga = Spp::where('id', '=', $siswa->id_spp)->first();
-        
+
 
         $bln = ['januari', 'februari', 'maret', 'april', 'mei', 'juni', 'juli', 'agustus', 'september', 'oktober', 'november', 'desember'];
 
@@ -88,7 +96,7 @@ class PembayaranController extends Controller
         } else {
             return redirect()->route('pembayaran.index')->with(['Error' => 'Gagal Disimpan']);
         }
-        
+
     }
 
     public function show($id) {
@@ -123,10 +131,30 @@ class PembayaranController extends Controller
     }
 
 
-    public function history()
+    public function history(Request $request)
     {
+        if ($request->has('cari')){
+            $pembayarans = Pembayaran::where('nisn','LIKE','%'.$request->cari.'%')->get();
+        }else{
+            $petugas = Pembayaran::all();
+        }
+
+        // dd($request->all());
         $spps = SPP::all();
         $pembayarans = Pembayaran::all();
         return view('history.index',compact('pembayarans','spps'));
     }
+
+
+
+    // Cari Fnc
+
+//     public function cari(Request $request)
+//     {
+//         $cari = $request->cari;
+//         $pembayarans = DB::table('pembayarans')
+//         ->where('nisn','like',"%".$cari."%");
+// // ->paginate();
+//         return view('pembayaran.index',['pembayarans' => $pembayarans]);
+//     }
 }
