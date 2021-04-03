@@ -38,6 +38,19 @@
             left: 500px;
         }
     </style>
+    {{-- data table --}}
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
 
 
 <a href="{{ route('pembayaran.create') }}" class="btn btn-success tambah mt-3">Tambah Transaksi </a>
@@ -45,7 +58,7 @@
 <div class="container">
     <div class="card-block text-center">
       <a href="/pembayaran/export_excel" class="btn btn-success my-3" target="_blank">EXPORT EXCEL</a>
-      <table class="table table-bordered  table-hover mt-3">
+      <table class="table table-bordered  table-hover mt-3" id="table_id">
 
         <thead>
           <tr>
@@ -68,12 +81,12 @@
     @foreach ($pembayarans as $s )
             <tr>
                 <td>{{ $i++ }}</td>
-                <td>{{ $s->id_petugas }}</td>
-                <td>{{ $s->nisn }}</td>
+                <td>{{ $s->username }}</td>
+                <td>{{ $s->nisn }} - {{$s->nama}}</td>
                 <td>{{ $s->tgl_bayar }}</td>
                 <td>{{ $s->bulan_bayar }}</td>
                 <td>{{ $s->tahun_bayar }}</td>
-                <td>{{ $s->id_spp }}</td>
+                <td>{{ $s->tahun }} - {{ $s->nominal }}</td>
                 <td>{{ $s->jumlah_bayar }}</td>
                 <td>
                   <form action="{{ route('pembayaran.destroy', $s) }}" method="POST">
@@ -86,5 +99,11 @@
               @endforeach
         </tbody>
 </table>
+
+<script>
+    $(document).ready( function () {
+        $('#table_id').DataTable();
+    } );
+    </script>
     </div>
 </div>

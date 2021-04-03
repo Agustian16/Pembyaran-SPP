@@ -15,6 +15,7 @@
     @php $no = 1 @endphp
     @foreach ($pembayarans as $s)
         <tr>
+            <td>{{$no++}}</td>
             <td>{{ $s->id_petugas }}</td>
                 <td>{{ $s->nisn }}</td>
                 <td>{{ $s->tgl_bayar }}</td>

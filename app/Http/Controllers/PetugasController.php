@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Str;
 
 class PetugasController extends Controller
 {
@@ -18,6 +19,10 @@ class PetugasController extends Controller
 
     public function create() {
         $users = User::all();
+        $users->password = bcrypt('123');
+        $users->level = 'petugas';
+        $users->remember_token = Str::random(60);
+        // $users->save();
         return view('petugas.create');
     }
 
@@ -25,15 +30,15 @@ class PetugasController extends Controller
      User::create([
             'id' => $request->id,
             'username' => $request ->username,
-            'password' => bcrypt($request->password),
-            'level' => $request->level,
+            'password' => bcrypt('123'),
+            'level' => 'petugas',
         ]);
 
         Petugas::create([
             'id' => $request->id,
             'username' => $request ->username,
-            'password' => bcrypt($request->password),
-            'level' => $request->level,
+            'password' => bcrypt('123'),
+            'level' => 'petugas',
         ]);
 
         // $data = $request->all();
@@ -75,10 +80,11 @@ class PetugasController extends Controller
 
         return redirect()->route('petugas.index');    }
 
-    public function destroy($id) {
-        // $petugas = Petugas::where('id',$id)->get();
+    public function destroy(Petugas $petugas) {
+        // $petugas = Petugas::where('id',$id)->first();
         // $petugas->delete();
-        User::find($id)->delete();
+        // Petugas::find($id)->delete();
+        User::destroy($petugas->id);
 
         return redirect()->route('petugas.index');
     }

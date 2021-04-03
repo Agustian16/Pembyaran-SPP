@@ -23,9 +23,12 @@ use App\Models\Pembayaran;
 */
 
 // Route::get('/', function () {
-//     return view('welcome');
-// });
+    //     return view('welcome');
+    // });
 
+    Route::get('/dashboard',function() {
+        return view('dashboard.index');
+    });
 
 // ! Route Login
 Route::get('/',[LC::class,'index'])->name('login.index');
@@ -43,6 +46,7 @@ Route::middleware('ceklevel:admin')->prefix('siswa')->group(function(){
     Route::get('/{nisn}/edit',[SC::class,'edit'])->name('siswa.edit');
     Route::put('/{nisn}/update',[SC::class,'update'])->name('siswa.update');
     Route::delete('/{nisn}/destroy',[SC::class,'destroy'])->name('siswa.destroy');
+
 });
 // ~ End Of Siswa Route
 
@@ -55,6 +59,7 @@ Route::middleware('ceklevel:admin')->prefix('kelas')->group(function(){
         Route::put('/{id_kelas}/update',[KC::class,'update'])->name('kelas.update');
         Route::delete('/{id_kelas}/destroy',[KC::class,'destroy'])->name('kelas.destroy');
     });
+
 
 
 // Route::group(['middleware' => ['auth', 'ceklevel:admin']], function(){
@@ -83,7 +88,7 @@ Route::middleware('ceklevel:admin')->prefix('spp')->group(function(){
 // ^ End Of SPP Route
 
 // ! Pembayaran Route
-Route::middleware('ceklevel:petugas,admin')->prefix('pembayaran')->group(function(){
+Route::middleware('ceklevel:Petugas,admin')->prefix('pembayaran')->group(function(){
     Route::get('/',[PC::class,'index'])->name('pembayaran.index');
     Route::get('/create',[PC::class,'create'])->name('pembayaran.create');
     Route::Post('/store',[PC::class,'store'])->name('pembayaran.store');
@@ -98,13 +103,13 @@ Route::middleware('ceklevel:petugas,admin')->prefix('pembayaran')->group(functio
 // ! End Of Pembayaran Route
 
 // % History Route
-Route::middleware('ceklevel:petugas,admin')->prefix('history')->group(function(){
+Route::middleware('ceklevel:Petugas,admin')->prefix('history')->group(function(){
     Route::get('/',[PC::class,'history'])->name('history.index');
     // Route::get('/cari',[PC::class,'cari'])->name('history.index');
 });
 // % History Route
 
-// ~ Petugas Route\
+// ~ Petugas Route
 Route::middleware('ceklevel:admin')->prefix('petugas')->group(function(){
     Route::get('/',[PTGC::class,'index'])->name('petugas.index');
     Route::get('/create',[PTGC::class,'create'])->name('petugas.create');

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Siswa;
 use App\Models\SPP;
 use App\Models\Pembayaran;
+use App\Models\view_siswas;
 use App\Models\Kelas;
 use App\Models\User;
 
@@ -14,7 +15,7 @@ use App\Models\User;
 class SiswaController extends Controller
 {
     public function index() {
-        $siswas = Siswa::all();
+        $siswas = view_siswas::all();
         $spps = SPP::all();
         $pembayarans = Pembayaran::all();
         $kelas = Kelas::all();
@@ -41,7 +42,7 @@ class SiswaController extends Controller
         ]);
 
         Siswa::create($request->all());
-        
+
         return redirect('siswa')->with('success','Siswa created successfully.');
     }
 

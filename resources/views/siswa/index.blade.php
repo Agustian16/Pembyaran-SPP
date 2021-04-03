@@ -28,7 +28,7 @@
             <li class="nav-item">
               <a class="nav-link" href="{{ route('history.index') }}">History</a>
             </li>
-            
+
           </ul>
           <a href="{{ route('logout') }}" class="btn btn-outline-warning">Keluar</a>
         </div>
@@ -48,7 +48,7 @@
   }
       </style>
   @php
-    $i = 1;  
+    $i = 1;
     @endphp
   <a href="{{ route('siswa.create') }}" class="btn btn-success tambah-data">Tambah Data</a>
 
@@ -75,11 +75,11 @@
         <td>{{ $s->nisn }}</td>
         <td>{{ $s->nis }}</td>
         <td>{{ $s->nama }}</td>
-        <td>{{ $s->id_kelas }}</td>
+        <td>{{$s->nama_kelas}}</td>
         <td>{{ $s->alamat }}</td>
         <td>{{ $s->no_telp }}</td>
-        <td>{{ $s->id_spp }}</td>
-        <td>    
+        <td>{{ $s->tahun }}</td>
+        <td>
           <form action="{{ route('siswa.destroy', $s->nisn) }}" method="POST">
             <a href="{{ route('siswa.edit',$s->nisn) }}" class="btn btn-warning">Edit</a>
             <a href="{{ route('siswa.show',$s->nisn) }}" class="btn btn-primary">Show</a>
@@ -92,6 +92,6 @@
       @endforeach
     </tbody>
   </table>
-  </div> 
+  </div>
   </div>
   </center>

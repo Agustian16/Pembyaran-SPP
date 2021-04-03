@@ -141,7 +141,7 @@ class PembayaranController extends Controller
 
         // dd($request->all());
         $spps = SPP::all();
-        $pembayarans = Pembayaran::all();
+        $pembayarans = view_pembayaran::all();
         return view('history.index',compact('pembayarans','spps'));
     }
 
