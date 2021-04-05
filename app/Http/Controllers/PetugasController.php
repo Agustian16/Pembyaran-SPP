@@ -41,21 +41,6 @@ class PetugasController extends Controller
             'level' => 'petugas',
         ]);
 
-        // $data = $request->all();
-        // $users = new User;
-
-        // // $users->id = $data['id'];
-        // $users->username = $data['username'];
-        // $users->password = $data['password'];
-        // $users->level = $data['level'];
-        // $users->save();
-
-        // $petugas = new Petugas;
-        // // $petugas->id = $data['id'];
-        // $petugas->username = $data['username'];
-        // $petugas->password = $data['password'];
-        // $petugas->level = $data['level'];
-
         return redirect('petugas');
     }
 
@@ -80,12 +65,10 @@ class PetugasController extends Controller
 
         return redirect()->route('petugas.index');    }
 
-    public function destroy(Petugas $petugas) {
-        // $petugas = Petugas::where('id',$id)->first();
-        // $petugas->delete();
-        // Petugas::find($id)->delete();
-        User::destroy($petugas->id);
+        public function destroy($id) {
+            $petugas = Petugas::where('id',$id);
+            $petugas->delete();
 
-        return redirect()->route('petugas.index');
-    }
+            return redirect()->route('petugas.index',compact('petugas'))->with('success','Petugas deleted successfully');
+        }
 }

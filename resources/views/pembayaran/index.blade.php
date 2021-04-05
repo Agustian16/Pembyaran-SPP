@@ -1,7 +1,7 @@
 @extends('layout')
 <nav class="navbar navbar-expand-lg bg-light" style="background-color: #e3f2fd;">
     <div class="container-fluid">
-      <a class="navbar-brand" href="{{ route('siswa.index') }}">Data Pembayaran SPP</a>
+      <a class="navbar-brand" href="{{ route('siswa.index') }}">Pembayaran SPP</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -89,7 +89,9 @@
                 <td>{{ $s->tahun }} - {{ $s->nominal }}</td>
                 <td>{{ $s->jumlah_bayar }}</td>
                 <td>
-                  <form action="{{ route('pembayaran.destroy', $s) }}" method="POST">
+                  <form action="{{ route('pembayaran.destroy', $s->id) }}" method="POST">
+
+                    <a href="{{ route('pembayaran.show',$s->id) }}"class="btn btn-primary">Show</a>
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="btn btn-danger" onclick="return confirm('Anda yakin ingin menghapus data ini?..')">Hapus</button>

@@ -13,6 +13,7 @@ use App\Exports\PembayaranExport;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Controllers\Controller;
 use App\Models\view_pembayaran;
+use App\Models\view_pembayarans;
 use Illuminate\Support\Facades\DB;
 
 class PembayaranController extends Controller
@@ -23,7 +24,7 @@ class PembayaranController extends Controller
     }
     public function index()
     {
-        $pembayarans = view_pembayaran::all();
+        $pembayarans = view_pembayaran::latest('created_at')->get();
         $petugas = Petugas::all();
         $siswa = Siswa::all();
         $spps = SPP::all();
@@ -100,7 +101,7 @@ class PembayaranController extends Controller
     }
 
     public function show($id) {
-        $pembayarans = Pembayaran::where('id',$id)->get();
+        $pembayarans = view_pembayaran::where('id',$id)->get();
         return view('pembayaran.show',compact('pembayarans'));
     }
 
@@ -133,17 +134,36 @@ class PembayaranController extends Controller
 
     public function history(Request $request)
     {
-        if ($request->has('cari')){
-            $pembayarans = Pembayaran::where('nisn','LIKE','%'.$request->cari.'%')->get();
-        }else{
-            $petugas = Pembayaran::all();
-        }
+        // fnc search
+        // if ($request->has('cari')){
+        //     $pembayarans = Pembayaran::where('nisn','LIKE','%'.$request->cari.'%')->get();
+        // }else{
+        //     $petugas = Pembayaran::all();
+        // }
 
         // dd($request->all());
-        $spps = SPP::all();
-        $pembayarans = view_pembayaran::all();
-        return view('history.index',compact('pembayarans','spps'));
+
+        if (auth()->user()->level=='admin' OR auth()->user()->level== 'petugas')
+        {
+            $pembayarans = view_pembayaran::all();
+        }
+        else
+        {
+            // validate siswa
+            $users = auth()->user()->username;
+            $siswas = Siswa::where('nama', $users)->pluck('nisn');
+            $pembayarans = view_pembayaran::where('nisn',$siswas)->get();
+        }
+        // $spps = SPP::all();
+
+
+        return view('history.index',compact('pembayarans'));
+
+
     }
+
+
+
 
 
 
@@ -157,4 +177,23 @@ class PembayaranController extends Controller
 // // ->paginate();
 //         return view('pembayaran.index',['pembayarans' => $pembayarans]);
 //     }
+
+        public function getData($nisn)
+        {
+            $siswas = Siswa::where('nisn', '=', $nisn)->first();
+            $spp = Spp::where('id', '=', $siswas->id_spp)->first();
+            $pembayaran = Pembayaran::where('nisn', '=', $siswas->nisn)
+                ->latest()
+                ->first();
+
+            $data = [
+                'harga' => $spp->nominal,
+                'bulan' => $pembayaran->bulan_bayar,
+                'tahun' => $pembayaran->tahun_bayar,
+            ];
+
+            return response()->json($data);
+        }
+
+
 }

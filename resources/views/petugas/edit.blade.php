@@ -1,5 +1,6 @@
 <h1>Halaman Edit Petugas</h1>
 <br>
+<a href="{{route('petugas.index')}}" class="btn btn-primary ml-4">Kembali</a>
 
 <form action="{{ route('petugas.update',$users->id) }}" method="POST">
     @csrf

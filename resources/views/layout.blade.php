@@ -49,8 +49,8 @@
   <script src="assets/bootstrap/js/bootstrap.esm.min.js.map"></script>
   <script src="assets/bootstrap/js/bootstrap.js"></script>
   <script src="assets/bootstrap/js/bootstrap.js.map"></script>
-  <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-  <script src="assets/bootstrap/js/bootstrap.min.js.map"></script>
+  <script src="assets/bootstrap/js/bootstrap.min.js"></script> --}}
+  {{-- <script src="assets/bootstrap/js/bootstrap.min.js.map"></script>
     <title>Aplikasi SPP</title>
   </head>
 

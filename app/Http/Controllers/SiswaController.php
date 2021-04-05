@@ -32,16 +32,21 @@ class SiswaController extends Controller
     }
 
     public function store(Request $request) {
-        $request->validate([
-            'nis' => 'required',
-            'nama' => ' required',
-            'id_kelas' => 'required',
-            'alamat' => 'required',
-            'no_telp' => 'required',
-            'id_spp' => 'required',
+        Siswa::create([
+            'nis' => $request->nis,
+            'nama' => $request->nama,
+            'id_kelas' => $request->id_kelas,
+            'alamat' => $request->alamat,
+            'no_telp' => $request->no_telp,
+            'id_spp' => $request->id_spp,
         ]);
 
-        Siswa::create($request->all());
+        User::create([
+            // 'id' => $request->id,
+            'username' => $request ->nama,
+            'password' => bcrypt($request->nis),
+            'level' => 'siswa',
+        ]);
 
         return redirect('siswa')->with('success','Siswa created successfully.');
     }
@@ -52,8 +57,10 @@ class SiswaController extends Controller
     }
 
     public function edit($nisn) {
+        $kelass = Kelas::all();
+        $spps = SPP::all();
         $siswas = Siswa::where('nisn',$nisn)->first();
-        return view('siswa.edit',compact('siswas'));
+        return view('siswa.edit',compact('siswas', 'kelass', 'spps'));
     }
 
     public function update(Request $request,$nisn) {
@@ -72,7 +79,7 @@ class SiswaController extends Controller
     }
 
     public function destroy($nisn) {
-        $siswas = Siswa::where('nisn',$nisn)->get();
+        $siswas = Siswa::where('nisn',$nisn);
         $siswas->delete();
 
         return redirect()->route('siswa.index',compact('siswas'))->with('success','Siswa deleted successfully');

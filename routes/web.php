@@ -25,7 +25,6 @@ use App\Models\Pembayaran;
 // Route::get('/', function () {
     //     return view('welcome');
     // });
-
     Route::get('/dashboard',function() {
         return view('dashboard.index');
     });
@@ -48,8 +47,8 @@ Route::middleware('ceklevel:admin')->prefix('siswa')->group(function(){
     Route::delete('/{nisn}/destroy',[SC::class,'destroy'])->name('siswa.destroy');
 
 });
-// ~ End Of Siswa Route
 
+// ~ Kelas Route
 Route::middleware('ceklevel:admin')->prefix('kelas')->group(function(){
         Route::get('/',[KC::class,'index'])->name('kelas.index');
         Route::Post('/store',[KC::class,'store'])->name('kelas.store');
@@ -88,7 +87,7 @@ Route::middleware('ceklevel:admin')->prefix('spp')->group(function(){
 // ^ End Of SPP Route
 
 // ! Pembayaran Route
-Route::middleware('ceklevel:Petugas,admin')->prefix('pembayaran')->group(function(){
+Route::middleware('ceklevel:petugas,admin')->prefix('pembayaran')->group(function(){
     Route::get('/',[PC::class,'index'])->name('pembayaran.index');
     Route::get('/create',[PC::class,'create'])->name('pembayaran.create');
     Route::Post('/store',[PC::class,'store'])->name('pembayaran.store');
@@ -97,15 +96,17 @@ Route::middleware('ceklevel:Petugas,admin')->prefix('pembayaran')->group(functio
     Route::put('/{id}/update',[PC::class,'update'])->name('pembayaran.update');
     Route::delete('/{id}/destroy',[PC::class,'destroy'])->name('pembayaran.destroy');
     Route::get('/export_excel',[PC::class,'export_excel']);
+    Route::get('get-data/{nisn}',[PC::class,'getData']);
 
 });
 
 // ! End Of Pembayaran Route
 
 // % History Route
-Route::middleware('ceklevel:Petugas,admin')->prefix('history')->group(function(){
+Route::middleware('ceklevel:Petugas,admin,siswa')->prefix('history')->group(function(){
     Route::get('/',[PC::class,'history'])->name('history.index');
     // Route::get('/cari',[PC::class,'cari'])->name('history.index');
+
 });
 // % History Route
 

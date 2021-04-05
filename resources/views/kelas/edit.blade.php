@@ -1,5 +1,8 @@
+@extends('layout')
 <h1>Halaman Edit Kelas</h1>
 <br>
+
+<a href="{{route('kelas.index')}}" class="btn btn-primary ml-4">Kembali</a>
 
 <form action="{{ route('kelas.update',$kelas->id_kelas) }}" method="POST">
     @csrf

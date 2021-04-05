@@ -1,3 +1,6 @@
+@extends('layout')
+    <a href="{{route('spp.index')}}" class="btn btn-primary ml-4">Kembali</a>
+
 <form action="{{ route('spp.update', $spps->id) }}" method="POST">
     @csrf
     @method('PATCH')

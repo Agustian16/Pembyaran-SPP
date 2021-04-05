@@ -1,4 +1,4 @@
-{{-- @extends('layout') --}}
+@extends('layout')
 
 
 
@@ -60,7 +60,14 @@
     <title>Halaman History</title>
 </head>
 <body>
-<table id="table_id" class="display">
+    <br>
+    <a href="{{route('history.index')}}" class="btn btn-primary ml-4">Kembali</a>
+    <br>
+    <br>
+    <center>
+    <h3>History Pembayaran SPP</h3>
+</center>
+    <table id="table_id" class="display">
     <thead>
         <tr>
             <th>NISN</th>
@@ -81,10 +88,10 @@
             <td>{{ $p->bulan_bayar }}</td>
             <td>{{ $p->tahun_bayar }}</td>
             <td>{{ $p->jumlah_bayar}}</td>
-            @foreach ($spps as $p )
+
             <td>{{ $p->nominal }}</td>
         </tr>
-        @endforeach
+
         @endforeach
     </tbody>
 </table>
