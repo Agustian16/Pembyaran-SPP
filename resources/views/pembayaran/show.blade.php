@@ -15,7 +15,8 @@
 
 <div class="card col-md-6 mt-10 mx-auto" onclick="window.print()">
     <div class="card-header">
-            <h2 class="text-center">Kwitansi Pembayaran Uang Spp</h2>
+
+        <h2 class="text-center">Kwitansi Pembayaran Uang Spp</h2>
     </div>
     @foreach ($pembayarans as $pembayaran)
     <div class="card-body">

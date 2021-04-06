@@ -20,16 +20,20 @@
 <body>
 
     <h1>Halaman Tambah Transaksi</h1>
+    
+    <br>
+        <a href="{{ route('pembayaran.index') }}" class="btn btn-primary">Kembali</a>
     <br>
 
     <form action="{{ route('pembayaran.store') }}" method="POST">
         @csrf
         <center>
             <label for="">Petugas:</label>
-            <input type="text" name="id_petugas" value="{{Auth::user()->id}}" readonly>
+            <input type="text" name="id_petugas" value="{{Auth::user()->id}}" readonly> 
                     <br>
                         <label for="">NISN :</label>
                                     <select name="nisn" id="nisn" onchange="dataSiswa()">
+                                        <option disabled selected>Pilih</option>
                                         @foreach ($siswa as $n )
                                         <option value="{{ $n->nisn }}">{{ $n->nisn }} - {{ $n->nama }}</option>
                                         @endforeach
@@ -47,7 +51,7 @@
                             <input type="number" name="jumlah_bayar">
                 <br>
                 <br>
-            <button type="submit">Tambah Data</button>
+            <button type="submit">Bayar</button>
         </center>
     </form>
 
@@ -60,7 +64,7 @@
 <script>
     function dataSiswa(){
          var nisn = $('#nisn').val();
-        //  console.log(nisn);
+         console.log(nisn);
 
          $.ajax({
              url:"{{ url('pembayaran/get-data/') }}"+ '/' + nisn,
@@ -75,5 +79,13 @@
          });
      }
 </script>
+
+<script>
+    $(document).ready(function() {
+        $("body").on("contextmenu", function(e) {
+            return false;
+          });
+      });
+  </script>
 </body>
 </html>

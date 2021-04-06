@@ -91,7 +91,7 @@
                 <td>
                   <form action="{{ route('pembayaran.destroy', $s->id) }}" method="POST">
 
-                    <a href="{{ route('pembayaran.show',$s->id) }}"class="btn btn-primary">Show</a>
+                    <a href="{{ route('pembayaran.show',$s->id) }}"class="btn btn-primary">Cetak Struk</a>
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="btn btn-danger" onclick="return confirm('Anda yakin ingin menghapus data ini?..')">Hapus</button>
